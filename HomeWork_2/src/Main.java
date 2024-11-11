@@ -2,9 +2,9 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Main {
-    static void FrequencyAnalysis(String path){
+    static void frequencyAnalysis(String path){
         // Проверка корректности введённых данных
-        if (!FileIsCorrectly(path)){
+        if (!fileIsCorrectly(path)){
             System.exit(1);
         }
 
@@ -15,7 +15,7 @@ public class Main {
         savingTheResults(result, path);
     }
 
-    static boolean FileIsCorrectly(String path){
+    static boolean fileIsCorrectly(String path){
         File file = new File(path);
         if (!file.exists()){
             System.out.println("По этому пути ничего не существует. Пожалуйста, убедитесь, что Вы корректно ввели путь");
@@ -49,7 +49,7 @@ public class Main {
     static void counting(int[] result, String path){
         try(FileReader f = new FileReader(path)){
             while(f.ready()){
-                int index = from_code_to_index_Eng(f.read());
+                int index = fromCodeToIndexEng(f.read());
                 if (index != -1) result[index] += 1;
             }
         }
@@ -63,13 +63,13 @@ public class Main {
         }
     }
 
-    static int from_code_to_index_Eng(int code){
+    static int fromCodeToIndexEng(int code){
         if ((64 < code) && (code < 91)) return code - 65;
         if ((96 < code) && (code < 123)) return code - 71;
         return -1;
     }
 
-    static int from_index_to_code_Eng(int index){
+    static int fromIndexToCodeEng(int index){
         if (index < 26) return index + 65;
         else return index + 71;
     }
@@ -79,12 +79,12 @@ public class Main {
 
         // Создание файла, куда будут положены результаты
         String name_of_file_with_results = nameSelection(path);
-        creating_new_file(name_of_file_with_results);
+        creatingNewFile(name_of_file_with_results);
 
         // Записываем результаты
         try(FileWriter fw = new FileWriter(name_of_file_with_results)){
             for(int i = 0; i < 52; i++){
-                int code = from_index_to_code_Eng(i);
+                int code = fromIndexToCodeEng(i);
                 String string_for_writing = (char)code + " " + result[i] + "\n";
                 fw.write(string_for_writing);
             }
@@ -96,7 +96,7 @@ public class Main {
 
     static String nameSelection(String path){
         String name_of_file_with_text = "RESULT_" + nameFromPath(path);
-        String name_of_directory = DirectoryFromPath(path);
+        String name_of_directory = directoryFromPath(path);
         String name_of_file_with_results = name_of_directory + name_of_file_with_text;
         File file_with_results = new File(name_of_file_with_results + ".txt");
         int number_of_attempt = 1;
@@ -112,7 +112,7 @@ public class Main {
         return file_with_results.getPath();
     }
 
-    static void creating_new_file(String path){
+    static void creatingNewFile(String path){
         try {
             File file_with_results = new File(path);
             if (file_with_results.createNewFile()){
@@ -149,7 +149,7 @@ public class Main {
         return name.reverse().toString();
     }
 
-    static String DirectoryFromPath(String path){
+    static String directoryFromPath(String path){
         StringBuilder directory = new StringBuilder();
         char[] path_charArray = path.toCharArray();
         int count_of_slashes = 0;
@@ -166,6 +166,6 @@ public class Main {
         System.out.println("Пожалуйста, напишите путь, где лежит файл:");
         String path = input.nextLine();
 
-        FrequencyAnalysis(path);
+        frequencyAnalysis(path);
     }
 }
