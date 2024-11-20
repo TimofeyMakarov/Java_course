@@ -10,6 +10,7 @@ public class Main {
                 "-----------------------------------------------------------------------------------------\n" +
                 "Ввод: ");
         String input = in.nextLine();
+        in.close();
         Person p = new Person(input);
         System.out.println(p);
     }
