@@ -46,7 +46,7 @@ public class Main {
         URL url1;
         URL url2;
         try {
-            url1 = new URL("https://fakse-json-api.mock.beeceptor.com/users");
+            url1 = new URL("https://fake-json-api.mock.beeceptor.com/users");
             url2 = new URL("https://fake-json-api.mock.beeceptor.com/companies");
         } catch (MalformedURLException e) {
             System.out.println("Неверно указан URL");
